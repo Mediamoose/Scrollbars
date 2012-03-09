@@ -3,7 +3,7 @@
  *
  * @author 		Sven
  * @since 		01-03-2012
- * @version 	0.5.0
+ * @version 	0.5.1
  *
  * This package requires MooTools 1.4 >
  *
@@ -31,7 +31,7 @@
  */
 var ScrollBars = ScrollBars || new Class({
 
-	version: '0.5.0',
+	version: '0.5.1',
 
 	Implements: [Options],
 
@@ -63,8 +63,8 @@ var ScrollBars = ScrollBars || new Class({
 			document.id(document.body).adopt(new Element('style',{'id':'webkit_hide_scrollbars','text':'.scrollbar-content::-webkit-scrollbar{visibility:hidden;} .scrollbar-content .scrollbar-content-wrapper:after{clear: both;}'}));
 
 		// Detect scrollbar size
-		var scrollBarSize = new Element('div',{styles:{'height':'100px','overflow':'scroll'}}).adopt(
-			new Element('div',{styles:{'height':'200px'}})
+		var scrollBarSize = new Element('div',{styles:{'height':'50px','overflow':'scroll'}}).adopt(
+			new Element('div',{styles:{'height':'60px'}})
 		);
 		document.id(document.body).adopt(scrollBarSize);
 
@@ -83,7 +83,7 @@ var ScrollBars = ScrollBars || new Class({
 			this._addFade(this.options.fade);
 
 		// Update sizes
-		this.updateScrollBars();
+		//this.updateScrollBars();
 
 		window.addEvent('load',this.updateScrollBars.bind(this));
 		window.addEvent('resize',this.updateScrollBars.bind(this));
@@ -108,7 +108,7 @@ var ScrollBars = ScrollBars || new Class({
 			'styles':{
 				'padding-right':this.nativeScrollBarSize,
 				'padding-bottom':this.nativeScrollBarSize,
-				'overflow':'scroll',
+				'overflow':'hidden',
 				'height':'100%',
 				'width':'100%'
 			}
@@ -118,18 +118,12 @@ var ScrollBars = ScrollBars || new Class({
 				'styles':{
 					'float': 'left',
 					'margin-right': -this.nativeScrollBarSize,
-					'margin-bottom': -this.nativeScrollBarSize + (Browser.ie ? this.options.scrollBarSize : 0)
+					'margin-bottom': -this.nativeScrollBarSize
 				}
 			}).adopt(this.element.childNodes)
 		);
 
 		this.element.adopt(scrollHtml);
-
-		this.element.setStyle('height',
-			this.element.style.height ?
-			this.element.getStyle('height') :
-			this.element.getElement('.scrollbar-content').getSize().y + (this.options.scrollBarSize-this.nativeScrollBarSize)
-		);
 
 		// Build scroll bar vertical
 		this.element.grab(
@@ -356,7 +350,7 @@ var ScrollBars = ScrollBars || new Class({
 				scrollBarVer = this.element.getElement('ul.scrollbar.vertical li.scroll.bar-wrapper .scroll.bar'),
 				scrollBarHor = this.element.getElement('ul.scrollbar.horizontal li.scroll.bar-wrapper .scroll.bar');
 
-			// End of scroll switch to bottom
+			// End of scroll switch to bottom @todo fix if statements
 			if (!Browser.ie && scrollBarVer.getStyle('height').toInt() + scrollBarDistanceVer >= 100) {
 				scrollBarVer.setStyle('bottom', '0');
 				scrollBarVer.setStyle('top', 'auto');
@@ -466,6 +460,14 @@ var ScrollBars = ScrollBars || new Class({
 				'padding-bottom': this.options.scrollBarSize
 			});
 		}
+
+		contentElement.setStyle('overflow','scroll');
+		this.element.setStyle(
+			'height',
+			this.element.style.height ?
+			this.element.getStyle('height') :
+			this.element.getSize().y - this.nativeScrollBarSize
+		);
 	},
 
 	/**
