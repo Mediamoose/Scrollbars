@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Scrollbars for MooTools 1.4</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Custom scrollbars build on MooTools 1.4.">
+	<meta name="author" content="Ceramedia">
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Le styles -->
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+		.prettyprint code { background: yellow; }
+	</style>
+	<link href="assets/css/bootstrap-responsive.css" rel="stylesheet" />
+	<link href="assets/css/docs.css" rel="stylesheet" />
+	<link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+
+	<!-- Le fav and touch icons -->
+	<link rel="shortcut icon" href="assets/ico/favicon.ico" />
+	<link rel="apple-touch-icon" href="assets/ico/apple-touch-icon.png" />
+
+	<script src="mootools/mootools-core-1.4.5.js"></script>
+
+	<script>
+
+		window.addEvent('domready',function(){
+			// Collapse menu
+			$$('a[data-toggle="collapse"]').addEvent('click',function(){
+				var target = $(document.body).getElement(this.get('data-target'));
+
+				if (target)
+					if (target.hasClass('collapse'))
+						target.removeClass('collapse');
+					else
+						target.addClass('collapse');
+			});
+			// Tab buttons
+			$$('ul.nav.nav-tabs a').addEvent('click',function(event){
+				event.preventDefault();
+
+				if (this.getParent('li').hasClass('active'))
+					return;
+
+				if (this.getParent('ul.nav.nav-tabs').getElement('li.active')) {
+					$$(this.getParent('ul.nav.nav-tabs').getElement('li.active a').get('href')).removeClass('active');
+					this.getParent('ul.nav.nav-tabs').getElement('li.active').removeClass('active');
+				}
+
+				$$(this.get('href')).addClass('active');
+				this.getParent('li').addClass('active');
+
+				// Update scrollbars when switching from tab (IE fix)
+				$$(this.get('href') + ' .scrollbars').each(function(ele){
+					ele.retrieve('scrollbars').updateScrollBars();
+				});
+			});
+		});
+	</script>
+
+	<!-- Load Scrollbars -->
+	<script src="scrollbars/scrollbars.min.js"></script>
+
+	<!-- Common used styles -->
+	<style>
+		/* In case you want to add scrollbars to the body add this */
+		/*html, body{ height: 100%; }*/
+
+		/* This site has a default margin on ul's so I have to reset it */
+		ul.scrollbar { margin: 0; list-style: none; }
+	</style>
+
+	<!-- OSX example -->
+	<link href="examples/osx/style.css" rel="stylesheet" />
+	<script src="examples/osx/script.js"></script>
+
+	<!-- Invert example -->
+	<link href="examples/invert/style.css" rel="stylesheet" />
+	<script src="examples/invert/script.js"></script>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="./index.html">Scrollbars</a>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li>
+						<a href="./index.html">Overview</a>
+					</li>
+					<li class="active">
+						<a href="./examples.html">Examples</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+
+	<div class="hero-unit">
+		<h1>Scrollbars for MooTools 1.4</h1>
+		<p style="padding:10px 0;">
+			This little script makes it easy to add custom scrollbars to almost any HTML element on your website in any (<abbr title="IE-8 and higher">modern browser</abbr>).
+		</p>
+		<p>
+			<a class="btn btn-large" href="https://github.com/ceramedia/Scrollbars/zipball/0.5.0" style="margin-right: 10px">Download Scrollbars 0.5.0</a>
+			<a class="btn btn-large btn-warning" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=GDYBZEWQUHTJ2" style="margin-right: 10px">Donate &raquo;</a>
+		</p>
+	</div>
+
+	<!-- OSX example -->
+	<div class="row">
+		<div class="span3">
+			<h2><a href="#example-osx" style="color:inherit;">OSX like scrollbars</a></h2>
+			<p>
+				This example is based on the scrollbars in OSX lion and iOS. Scrollbars are laying over the content and they automatically fadeout when they are unused for half a second.
+			</p>
+		</div>
+		<div class="span9">
+
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#example-osx">Examples</a></li>
+				<li><a href="#example-osx-script">JavaScript</a></li>
+				<li><a href="#example-osx-style">Style</a></li>
+				<li><a href="#example-osx-html">HTML</a></li>
+		    </ul>
+
+			<div class="tab-content">
+				<div class="tab-pane row active" id="example-osx">
+
+					<div class="span3 scrollbars osx" style="height: 90px">
+						<h4>Scroll vertically</h4>
+						Suspendisse potenti. Donec sodales varius nisl, in lobortis metus imperdiet non. In sed vulputate elit. Etiam rutrum, purus non condimentum laoreet, purus quam congue massa, nec dapibus eros eros ac dui. Ut non nunc at lorem pulvinar rutrum. Ut ut mauris augue, eget hendrerit erat. Aliquam erat volutpat.
+					</div>
+					<div class="span3 scrollbars osx" style="height: 90px">
+						<h4>Scroll both ways</h4>
+						<p style="width:400px; margin:0;">
+							In hac habitasse platea dictumst. Integer nunc sem, rhoncus a molestie et, interdum sed tellus. Suspendisse vel nulla lacus, at malesuada justo. Integer vel sagittis orci. Duis fringilla aliquam urna, vel sollicitudin turpis feugiat vitae. Cras blandit feugiat faucibus. Sed dignissim eros in risus commodo mattis.
+							Suspendisse est lacus, cursus sed porta et, consectetur non odio. Morbi non lacus nulla, vitae varius justo. Praesent at velit a lectus tempor mattis nec eu risus. Vestibulum non est quam. Quisque rhoncus aliquet libero, lobortis mollis sapien laoreet sed. Maecenas mauris orci, consectetur quis porttitor ut, pellentesque sed quam. Suspendisse id nisi arcu, id placerat nunc. Nunc sit amet turpis risus, ullamcorper ultrices lectus. Duis euismod velit eget augue faucibus ullamcorper. Pellentesque vestibulum sodales porttitor. Sed at tortor et sapien congue cursus at ut nisi. Vivamus vulputate, urna non convallis sagittis, lacus elit imperdiet orci, sed mattis lacus eros quis nibh. Phasellus faucibus adipiscing vehicula. Morbi eget nibh euismod ante dictum porta. Vivamus vel mauris varius diam varius adipiscing. Cras eu odio vitae mauris tincidunt luctus sed non nibh.
+						</p>
+					</div>
+					<div class="span3 scrollbars osx">
+						<h4>No scroll needed (inactive)</h4>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra malesuada leo, sed sodales ligula laoreet sit amet. Proin venenatis congue mi ac bibendum.
+					</div>
+
+				</div>
+				<div class="tab-pane" id="example-osx-script">
+
+					<pre class="prettyprint linenums">
+window.addEvent('domready',function(){
+	$$('.scrollbars.osx').scrollbars({
+		scrollBarSize:10,
+		barOverContent:true,
+		fade:true // default 500 milliseconds
+	});
+});</pre>
+
+				</div>
+				<div class="tab-pane" id="example-osx-style">
+
+					<pre class="prettyprint linenums">
+/* Set inactive scrollbars to display none */
+.scrollbars.osx ul.scrollbar.inactive { display: none; }
+
+/* No scrollbar buttons */
+.scrollbars.osx ul.scrollbar li.scroll.down,
+.scrollbars.osx ul.scrollbar li.scroll.up,
+.scrollbars.osx ul.scrollbar li.scroll.left,
+.scrollbars.osx ul.scrollbar li.scroll.right{
+	display: none;
+}
+
+/* Move the bars a bit from the side and make them a little bit smaller then its wrapper*/
+.scrollbars.osx ul.scrollbar.vertical li.scroll.bar-wrapper{
+	min-width: 7px !important;
+	right: 2px !important; }
+.scrollbars.osx ul.scrollbar.horizontal li.scroll.bar-wrapper{
+	min-height: 7px !important;
+	bottom: 2px !important;
+}
+
+/* Scrollbar style */
+.scrollbars.osx ul.scrollbar li.scroll.bar-wrapper div.scroll.bar{
+	background: black;
+	opacity: .5;
+	border-radius: 5px;
+}</pre>
+
+				</div>
+				<div class="tab-pane" id="example-osx-html">
+
+					<pre class="prettyprint linenums">
+&lt;div class="tab-pane row active" id="example-osx"&gt;
+	&lt;div class="span3 <code>scrollbars osx</code>" <code>style="height: 90px"</code>&gt;
+		&lt;h4&gt;Scroll vertically&lt;/h4&gt;
+		...
+	&lt;/div&gt;
+	&lt;div class="span3 <code>scrollbars osx</code>" <code>style="height: 90px"</code>&gt;
+		&lt;h4&gt;Scroll both ways&lt;/h4&gt;
+		&lt;p style="width:400px; margin:0;"&gt;
+			...
+		&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div class="span3 <code>scrollbars osx</code>"&gt;
+		&lt;h4&gt;No scroll needed (inactive)&lt;/h4&gt;
+		...
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end OSX example -->
+
+
+
+	<!-- Invert example -->
+	<div class="row">
+		<div class="span3">
+			<h2><a href="#example-invert" style="color:inherit;">Invert (White on Black)</a></h2>
+			<p>
+				An inverted version of the OSX example.
+			</p>
+		</div>
+		<div class="span9">
+
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#example-invert">Examples</a></li>
+				<li><a href="#example-invert-script">JavaScript</a></li>
+				<li><a href="#example-invert-style">Style</a></li>
+				<li><a href="#example-invert-html">HTML</a></li>
+		    </ul>
+
+			<div class="tab-content">
+				<div class="tab-pane row active" id="example-invert">
+					<style scoped="scoped">
+						/* Some style for the black background */
+						.scrollbars.invert ul.scrollbar.horizontal:after { border-radius: 0 0 5px 0; }
+						#example-invert .black-wrapper h4{ color:#fff; }
+						#example-invert .black-wrapper{
+							background:#000;
+							color:#fff;
+							padding:10px 0 0 10px;
+							border-radius: 5px;
+							overflow:hidden;
+						}
+					</style>
+					<div class="span3">
+						<div class="black-wrapper">
+							<div class="scrollbars invert" style="height:100px;">
+								<h4>Scroll vertically</h4>
+								Suspendisse potenti. Donec sodales varius nisl, in lobortis metus imperdiet non. In sed vulputate elit. Etiam rutrum, purus non condimentum laoreet, purus quam congue massa, nec dapibus eros eros ac dui. Ut non nunc at lorem pulvinar rutrum. Ut ut mauris augue, eget hendrerit erat. Aliquam erat volutpat.
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="black-wrapper">
+							<div class="scrollbars invert" style="height:100px;">
+								<h4>Scroll both ways</h4>
+								<p style="width:400px; margin:0;">
+									In hac habitasse platea dictumst. Integer nunc sem, rhoncus a molestie et, interdum sed tellus. Suspendisse vel nulla lacus, at malesuada justo. Integer vel sagittis orci. Duis fringilla aliquam urna, vel sollicitudin turpis feugiat vitae. Cras blandit feugiat faucibus. Sed dignissim eros in risus commodo mattis.
+									Suspendisse est lacus, cursus sed porta et, consectetur non odio. Morbi non lacus nulla, vitae varius justo. Praesent at velit a lectus tempor mattis nec eu risus. Vestibulum non est quam. Quisque rhoncus aliquet libero, lobortis mollis sapien laoreet sed. Maecenas mauris orci, consectetur quis porttitor ut, pellentesque sed quam. Suspendisse id nisi arcu, id placerat nunc. Nunc sit amet turpis risus, ullamcorper ultrices lectus. Duis euismod velit eget augue faucibus ullamcorper. Pellentesque vestibulum sodales porttitor. Sed at tortor et sapien congue cursus at ut nisi. Vivamus vulputate, urna non convallis sagittis, lacus elit imperdiet orci, sed mattis lacus eros quis nibh. Phasellus faucibus adipiscing vehicula. Morbi eget nibh euismod ante dictum porta. Vivamus vel mauris varius diam varius adipiscing. Cras eu odio vitae mauris tincidunt luctus sed non nibh.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="black-wrapper">
+							<div class="scrollbars invert">
+								<h4>No scroll needed (inactive)</h4>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra malesuada leo, sed sodales ligula laoreet sit amet. Proin venenatis congue mi ac bibendum.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="example-invert-script">
+
+					<pre class="prettyprint linenums">
+window.addEvent('domready',function(){
+	$$('.scrollbars.invert').scrollbars({
+		scrollBarSize:10
+	});
+});</pre>
+
+				</div>
+				<div class="tab-pane" id="example-invert-style">
+
+					<pre class="prettyprint linenums">
+/* Set inactive scrollbars to display none, but keep the wrapper displayed */
+.scrollbars.invert ul.scrollbar.inactive li.scroll.bar-wrapper{ display: none; }
+
+/* No scrollbar buttons */
+.scrollbars.invert ul.scrollbar li.scroll.down,
+.scrollbars.invert ul.scrollbar li.scroll.up,
+.scrollbars.invert ul.scrollbar li.scroll.left,
+.scrollbars.invert ul.scrollbar li.scroll.right{
+	display: none;
+}
+
+/* Move the bars a bit from the side and make them a little bit smaller then its wrapper*/
+.scrollbars.invert ul.scrollbar.vertical li.scroll.bar-wrapper{
+	min-width: 7px !important;
+	right: 2px !important; }
+.scrollbars.invert ul.scrollbar.horizontal li.scroll.bar-wrapper{
+	min-height: 7px !important;
+	bottom: 2px !important;
+}
+
+/* Scrollbar style */
+.scrollbars.invert ul.scrollbar { background: #000; }
+/* Fill up the space between the vertical and horizontal bars */
+.scrollbars.invert ul.scrollbar.horizontal:after {
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	line-height: 0;
+	background: black;
+	margin-right: -10px;
+	float: right;
+}
+.scrollbars.invert ul.scrollbar li.scroll.bar-wrapper div.scroll.bar{
+	background: white;
+	border-radius: 5px;
+}</pre>
+
+				</div>
+				<div class="tab-pane" id="example-invert-html">
+
+					<pre class="prettyprint linenums">
+&lt;div class="tab-pane row active" id="example-invert"&gt;
+	&lt;style scoped="scoped"&gt;
+		/* Some style for the black background */
+		.scrollbars.invert ul.scrollbar.horizontal:after { border-radius: 0 0 5px 0; }
+		#example-invert .black-wrapper h4{ color:#fff; }
+		#example-invert .black-wrapper{
+			background:#000;
+			color:#fff;
+			padding:10px 0 0 10px;
+			border-radius: 5px;
+			overflow:hidden;
+		}
+	&lt;/style&gt;
+	&lt;div class="span3"&gt;
+		&lt;div class="black-wrapper"&gt;
+			&lt;div class="<code>scrollbars invert</code>" <code>style="height:100px;"</code>&gt;
+				&lt;h4&gt;Scroll vertically&lt;/h4&gt;
+				...
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="span3"&gt;
+		&lt;div class="black-wrapper"&gt;
+			&lt;div class="<code>scrollbars invert</code>" <code>style="height:100px;"</code>&gt;
+				&lt;h4&gt;Scroll both ways&lt;/h4&gt;
+				&lt;p style="width:400px; margin:0;"&gt;
+					...
+				&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="span3"&gt;
+		&lt;div class="black-wrapper"&gt;
+			&lt;div class="<code>scrollbars invert</code>"&gt;
+				&lt;h4&gt;No scroll needed (inactive)&lt;/h4&gt;
+				...
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end Invert example -->
+
+	<hr/>
+
+	<div class="row">
+		<div class="span12">
+			More examples will be added soon...
+		</div>
+	</div>
+
+	<hr/>
+
+	<footer>
+		<p>&copy; <a href="http://ceramedia.net">Ceramedia</a> 2012</p>
+	</footer>
+
+</div> <!-- /container -->
+
+<script src="assets/js/google-code-prettify/prettify.js"></script>
+<script>
+// make code pretty
+window.prettyPrint && prettyPrint()
+</script>
+
+</body>
+</html>
+<!--
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra malesuada leo, sed sodales ligula laoreet sit amet. Proin venenatis congue mi ac bibendum. Aenean augue metus, laoreet ac auctor non, feugiat vel erat. Nunc congue lorem et urna placerat varius. Suspendisse sapien justo, volutpat non accumsan vulputate, rutrum non lacus. Curabitur egestas, justo a laoreet malesuada, elit leo sollicitudin purus, eget varius massa augue non urna. Donec vitae mi nisi, ut laoreet turpis. Proin ut magna augue, ut consequat dui. Vivamus et velit eros. Donec porttitor convallis sapien, sit amet vehicula eros suscipit sed. Aliquam erat volutpat. Suspendisse ac ligula eros. Maecenas et nulla neque. Donec mattis nibh ut velit vehicula rhoncus. Aenean id iaculis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Suspendisse potenti. Donec sodales varius nisl, in lobortis metus imperdiet non. In sed vulputate elit. Etiam rutrum, purus non condimentum laoreet, purus quam congue massa, nec dapibus eros eros ac dui. Ut non nunc at lorem pulvinar rutrum. Ut ut mauris augue, eget hendrerit erat. Aliquam erat volutpat.
+
+Fusce ac nunc sed nulla euismod vehicula. Etiam porta lacus at tortor porta a faucibus neque adipiscing. Aliquam vel risus at felis varius posuere pulvinar id metus. Donec suscipit congue volutpat. Pellentesque iaculis ipsum ut dui ultrices a tristique urna vehicula. Vivamus volutpat elit vel leo placerat porttitor. Donec consequat sem non mi scelerisque laoreet. Pellentesque dapibus nisi sit amet sem pretium suscipit. Duis quis leo sed ipsum gravida placerat ac sit amet lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed pulvinar, sapien id hendrerit ultricies, odio felis tempor nibh, sit amet tincidunt magna dui ac urna. Nulla rhoncus, turpis sed porttitor suscipit, dui velit fermentum elit, eu iaculis nisl dui vel velit. Phasellus quis iaculis nunc. Sed urna risus, molestie a tincidunt ut, lobortis vel ligula. Donec dolor elit, convallis vitae iaculis ut, mollis sed velit.
+
+In hac habitasse platea dictumst. Integer nunc sem, rhoncus a molestie et, interdum sed tellus. Suspendisse vel nulla lacus, at malesuada justo. Integer vel sagittis orci. Duis fringilla aliquam urna, vel sollicitudin turpis feugiat vitae. Cras blandit feugiat faucibus. Sed dignissim eros in risus commodo mattis.
+
+Suspendisse est lacus, cursus sed porta et, consectetur non odio. Morbi non lacus nulla, vitae varius justo. Praesent at velit a lectus tempor mattis nec eu risus. Vestibulum non est quam. Quisque rhoncus aliquet libero, lobortis mollis sapien laoreet sed. Maecenas mauris orci, consectetur quis porttitor ut, pellentesque sed quam. Suspendisse id nisi arcu, id placerat nunc. Nunc sit amet turpis risus, ullamcorper ultrices lectus. Duis euismod velit eget augue faucibus ullamcorper. Pellentesque vestibulum sodales porttitor. Sed at tortor et sapien congue cursus at ut nisi. Vivamus vulputate, urna non convallis sagittis, lacus elit imperdiet orci, sed mattis lacus eros quis nibh. Phasellus faucibus adipiscing vehicula. Morbi eget nibh euismod ante dictum porta. Vivamus vel mauris varius diam varius adipiscing. Cras eu odio vitae mauris tincidunt luctus sed non nibh.
+
+-->
