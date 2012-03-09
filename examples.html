@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Scrollbars for MooTools 1.4</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" />
 	<meta name="description" content="Custom scrollbars build on MooTools 1.4.">
 	<meta name="author" content="Ceramedia">
 
@@ -68,7 +68,7 @@
 	</script>
 
 	<!-- Load Scrollbars -->
-	<script src="scrollbars/scrollbars.min.js"></script>
+	<script src="scrollbars/scrollbars.js?0.5.1"></script>
 
 	<!-- Common used styles -->
 	<style>
@@ -80,12 +80,12 @@
 	</style>
 
 	<!-- OSX example -->
-	<link href="examples/osx/style.css" rel="stylesheet" />
-	<script src="examples/osx/script.js"></script>
+	<link href="examples/osx/style.css?0.5.1" rel="stylesheet" />
+	<script src="examples/osx/script.js?0.5.1"></script>
 
 	<!-- Invert example -->
-	<link href="examples/invert/style.css" rel="stylesheet" />
-	<script src="examples/invert/script.js"></script>
+	<link href="examples/invert/style.css?0.5.1" rel="stylesheet" />
+	<script src="examples/invert/script.js?0.5.1"></script>
 
 </head>
 
@@ -124,13 +124,13 @@
 			This little script makes it easy to add custom scrollbars to almost any HTML element on your website in any (<abbr title="IE-8 and higher">modern browser</abbr>).
 		</p>
 		<p>
-			<a class="btn btn-large" href="https://github.com/ceramedia/Scrollbars/zipball/0.5.0" style="margin-right: 10px">Download Scrollbars 0.5.0</a>
+			<a class="btn btn-large" href="https://github.com/ceramedia/Scrollbars/zipball/0.5.1" style="margin-right: 10px">Download Scrollbars 0.5.1</a>
 			<a class="btn btn-large btn-warning" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=GDYBZEWQUHTJ2" style="margin-right: 10px">Donate &raquo;</a>
 		</p>
 	</div>
 
 	<!-- OSX example -->
-	<div class="row">
+	<div class="row" style="margin-bottom: 9px">
 		<div class="span3">
 			<h2><a href="#example-osx" style="color:inherit;">OSX like scrollbars</a></h2>
 			<p>
@@ -236,8 +236,6 @@ window.addEvent('domready',function(){
 	</div>
 	<!-- end OSX example -->
 
-
-
 	<!-- Invert example -->
 	<div class="row">
 		<div class="span3">
@@ -257,7 +255,7 @@ window.addEvent('domready',function(){
 
 			<div class="tab-content">
 				<div class="tab-pane row active" id="example-invert">
-					<style scoped="scoped">
+					<style>
 						/* Some style for the black background */
 						.scrollbars.invert ul.scrollbar.horizontal:after { border-radius: 0 0 5px 0; }
 						#example-invert .black-wrapper h4{ color:#fff; }
@@ -266,7 +264,6 @@ window.addEvent('domready',function(){
 							color:#fff;
 							padding:10px 0 0 10px;
 							border-radius: 5px;
-							overflow:hidden;
 						}
 					</style>
 					<div class="span3">
