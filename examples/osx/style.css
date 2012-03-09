@@ -1,0 +1,29 @@
+/* Overflow auto in case JavaScript is disabled */
+.scrollbars.osx{ overflow: auto; }
+
+/* Set inactive scrollbars to display none */
+.scrollbars.osx ul.scrollbar.inactive { display: none; }
+
+/* No scrollbar buttons */
+.scrollbars.osx ul.scrollbar li.scroll.down,
+.scrollbars.osx ul.scrollbar li.scroll.up,
+.scrollbars.osx ul.scrollbar li.scroll.left,
+.scrollbars.osx ul.scrollbar li.scroll.right{
+	display: none;
+}
+
+/* Move the bars a bit from the side and make them a little bit smaller then its wrapper*/
+.scrollbars.osx ul.scrollbar.vertical li.scroll.bar-wrapper{
+	min-width: 7px !important;
+	right: 2px !important; }
+.scrollbars.osx ul.scrollbar.horizontal li.scroll.bar-wrapper{
+	min-height: 7px !important;
+	bottom: 2px !important;
+}
+
+/* Scrollbar style */
+.scrollbars.osx ul.scrollbar li.scroll.bar-wrapper div.scroll.bar{
+	background: black;
+	opacity: .5;
+	border-radius: 5px;
+}

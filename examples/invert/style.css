@@ -1,0 +1,40 @@
+/* Overflow auto in case JavaScript is disabled */
+.scrollbars.invert{ overflow: auto; }
+
+/* Set inactive scrollbars to display none, but keep the wrapper displayed */
+.scrollbars.invert ul.scrollbar.inactive li.scroll.bar-wrapper{ display: none; }
+
+/* No scrollbar buttons */
+.scrollbars.invert ul.scrollbar li.scroll.down,
+.scrollbars.invert ul.scrollbar li.scroll.up,
+.scrollbars.invert ul.scrollbar li.scroll.left,
+.scrollbars.invert ul.scrollbar li.scroll.right{
+	display: none;
+}
+
+/* Move the bars a bit from the side and make them a little bit smaller then its wrapper*/
+.scrollbars.invert ul.scrollbar.vertical li.scroll.bar-wrapper{
+	min-width: 7px !important;
+	right: 2px !important; }
+.scrollbars.invert ul.scrollbar.horizontal li.scroll.bar-wrapper{
+	min-height: 7px !important;
+	bottom: 2px !important;
+}
+
+/* Scrollbar style */
+.scrollbars.invert ul.scrollbar { background: #000; }
+/* Fill up the space between the vertical and horizontal bars */
+.scrollbars.invert ul.scrollbar.horizontal:after {
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	line-height: 0;
+	background: black;
+	margin-right: -10px;
+	float: right;
+}
+.scrollbars.invert ul.scrollbar li.scroll.bar-wrapper div.scroll.bar{
+	background: white;
+	border-radius: 5px;
+}
