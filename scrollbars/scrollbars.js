@@ -3,7 +3,7 @@
  *
  * @author 		Sven
  * @since 		01-03-2012
- * @version 	0.5.1
+ * @version 	0.5.2
  *
  * This package requires MooTools 1.4 >
  *
@@ -31,7 +31,7 @@
  */
 var ScrollBars = ScrollBars || new Class({
 
-	version: '0.5.1',
+	version: '0.5.2',
 
 	Implements: [Options],
 
@@ -63,8 +63,8 @@ var ScrollBars = ScrollBars || new Class({
 			document.id(document.body).adopt(new Element('style',{'id':'webkit_hide_scrollbars','text':'.scrollbar-content::-webkit-scrollbar{visibility:hidden;} .scrollbar-content .scrollbar-content-wrapper:after{clear: both;}'}));
 
 		// Detect scrollbar size
-		var scrollBarSize = new Element('div',{styles:{'height':'50px','overflow':'scroll'}}).adopt(
-			new Element('div',{styles:{'height':'60px'}})
+		var scrollBarSize = new Element('div',{styles:{'height':'150px','overflow':'scroll'}}).adopt(
+			new Element('div',{styles:{'height':'160px'}})
 		);
 		document.id(document.body).adopt(scrollBarSize);
 
